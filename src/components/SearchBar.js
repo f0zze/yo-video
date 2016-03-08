@@ -4,24 +4,25 @@ import React from 'react';
 
 export default class SearchBar extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             term: ''
         };
     }
 
-    onInputChange(event) {
-
-    }
-
     render() {
         return (
-            <span>
-                <label>Search video</label>
-                <input value={this.state.term} onChange={this.onInputChange.bind(this)} type="text"
+            <div className="search-bar">
+                <input onChange={event=>this.onInputChange(event.target.value)} type="text"
                        placeholder="Search video"/>
-            </span>
+            </div>
         );
+    }
+
+
+    onInputChange(term) {
+        this.setState({term});
+        this.props.onSearch(term);
     }
 }
